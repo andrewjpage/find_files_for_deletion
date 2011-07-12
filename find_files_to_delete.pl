@@ -29,6 +29,7 @@ use File::Find;
 use Getopt::Long;
 use Pathogens::ConfigSettings;
 use Pathogens::FindFiles;
+use Pathogens::OverallStats;
 
 my $DIRECTORY;
 my $OUTPUT_FILE;
@@ -74,6 +75,15 @@ else
       regex           => ($config_settings{$place_to_search}{regex}   || $config_settings{default}{regex}), 
       exclude         => ($config_settings{$place_to_search}{exclude} || $config_settings{default}{exclude})
     );
+
+		my $overall_stats = Pathogens::OverallStats->new(
+		   find_files_output_file               => $config_settings{$place_to_search}{output_file},
+		   user_files_threshold                 => $config_settings{default}{user_files_threshold},
+		   user_total_space_threshold_gigabytes => $config_settings{default}{user_total_space_threshold_gigabytes},
+		   users_to_exclude                     => $config_settings{default}{users_to_exclude}
+		);
+		print $overall_stats->report_data;
+
   }
 }
 

@@ -2,6 +2,9 @@ default:
   regex: (\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.fastq$)|(\.fastq\.gz$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
   exclude:
   places_to_search: ['pathdata', 'pathogen002']
+  user_files_threshold: 100
+  user_total_space_threshold_gigabytes: 0.01
+  users_to_exclude: ['root']
 
 pathdata:
   root_directory: /nfs/pathdata
