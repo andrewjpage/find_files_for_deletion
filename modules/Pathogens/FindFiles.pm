@@ -23,7 +23,7 @@ use File::Find;
 
 has 'output_file'         => ( is => 'rw', isa => 'Str', required   => 1 );
 has 'directory'           => ( is => 'rw', isa => 'Str', required   => 1 );
-has 'exclude'             => ( is => 'rw', isa => 'Str' );
+has 'exclude'             => ( is => 'rw', isa => 'Maybe[Str]' );
 has 'regex'               => ( is => 'rw', isa => 'Str', required   => 1 );
 has '_output_file_handle' => ( is => 'rw' );
 

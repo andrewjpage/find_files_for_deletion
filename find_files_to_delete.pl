@@ -6,7 +6,7 @@ find_files_to_delete.pl
 
 =head1 SYNOPSIS
 
-find_files_to_delete.pl -e test -d /path_to/directory -o my_output_file
+perl find_files_to_delete.pl -e test -d t/ -o output
 
 =head1 DESCRIPTION
 
@@ -21,6 +21,7 @@ path-help@sanger.ac.uk
 =head1 METHODS
 
 =cut
+
 BEGIN { unshift(@INC, './modules') }
 use strict;
 use warnings;
@@ -28,8 +29,6 @@ use File::Find;
 use Getopt::Long;
 use Pathogens::ConfigSettings;
 use Pathogens::FindFiles;
-
-
 
 my $DIRECTORY;
 my $OUTPUT_FILE;
@@ -66,6 +65,7 @@ if(( defined $DIRECTORY) && ( defined $OUTPUT_FILE))
 }
 else
 {
+  # run in bulk from the config file
   for my $place_to_search ( @{$config_settings{default}{places_to_search}} )
   {
     Pathogens::FindFiles->new(
