@@ -1,0 +1,15 @@
+default:
+  regex: (\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.fastq$)|(\.fastq\.gz$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
+  exclude:
+  places_to_search: ['pathdata', 'pathogen002']
+
+pathdata:
+  root_directory: /nfs/pathdata
+  exclude: .snapshot
+  regex: (\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.fastq$)|(\.fastq\.gz$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
+  output_file: /lustre/scratch103/pathogen/pathpipe/pathdata_files_for_deletion
+  
+pathogen002:
+  root_directory: /nfs/pathogen002
+  output_file: /lustre/scratch103/pathogen/pathpipe/pathogen002_files_for_deletion
+  
