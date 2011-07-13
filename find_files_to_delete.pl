@@ -30,6 +30,7 @@ use Getopt::Long;
 use Pathogens::ConfigSettings;
 use Pathogens::FindFiles;
 use Pathogens::OverallStats;
+use Pathogens::OverallStatsAdminEmail;
 
 my $DIRECTORY;
 my $OUTPUT_FILE;
@@ -56,6 +57,7 @@ USAGE
 my %config_settings = %{Pathogens::ConfigSettings->new(environment => $ENVIRONMENT, filename => 'config.yml')->settings()};
 
 # values passed in so use these instead of the places to search values in the config files
+#TODO dry this out
 if(( defined $DIRECTORY) && ( defined $OUTPUT_FILE))
 {
   Pathogens::FindFiles->new(
@@ -64,6 +66,23 @@ if(( defined $DIRECTORY) && ( defined $OUTPUT_FILE))
     regex           => $config_settings{default}{regex}, 
     exclude         => $config_settings{default}{exclude}
   );
+
+	my $overall_stats = Pathogens::OverallStats->new(
+	   find_files_output_file               => $OUTPUT_FILE,
+	   user_files_threshold                 => $config_settings{default}{user_files_threshold},
+	   user_total_space_threshold_gigabytes => $config_settings{default}{user_total_space_threshold_gigabytes},
+	   users_to_exclude                     => $config_settings{default}{users_to_exclude}
+	);
+	
+		
+	Pathogens::OverallStatsAdminEmail->new(
+		admin_email_addresses => $config_settings{default}{admin_email_addresses},
+		report_data => $overall_stats->report_data,
+		total_filesize => $overall_stats->total_filesize,
+		total_files => $overall_stats->total_files,
+		directory => $DIRECTORY
+	);
+
 }
 else
 {
@@ -83,7 +102,14 @@ else
 		   user_total_space_threshold_gigabytes => $config_settings{default}{user_total_space_threshold_gigabytes},
 		   users_to_exclude                     => $config_settings{default}{users_to_exclude}
 		);
-		print $overall_stats->report_data;
+		
+		Pathogens::OverallStatsAdminEmail->new(
+			admin_email_addresses => $config_settings{default}{admin_email_addresses},
+			report_data => $overall_stats->report_data,
+			total_filesize => $overall_stats->total_filesize,
+			total_files => $overall_stats->total_files,
+			directory => $config_settings{$place_to_search}{root_directory}
+		);
 
   }
 }

@@ -5,6 +5,7 @@ default:
   user_files_threshold: 100
   user_total_space_threshold_gigabytes: 0.01
   users_to_exclude: ['root']
+  admin_email_addresses: ['ap13@sanger.ac.uk']
 
 pathdata:
   root_directory: /nfs/pathdata

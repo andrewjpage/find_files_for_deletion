@@ -1,4 +1,13 @@
 default:
   regex: (\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.fastq$)|(\.fastq\.gz$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
-  exclude:
-  places_to_search: []
+  exclude: .directory_to_ignore
+  places_to_search: ['test']
+  user_files_threshold: 1
+  user_total_space_threshold_gigabytes: 0.0000001
+  users_to_exclude: ['root']
+  admin_email_addresses: ['ap13@sanger.ac.uk']
+
+test:
+  root_directory: t/data
+  output_file: test_files_for_deletion
+  

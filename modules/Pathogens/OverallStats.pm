@@ -29,6 +29,7 @@ has 'users_to_exclude'                     => ( is => 'rw', isa => 'Maybe[ArrayR
 has 'users_files'                          => ( is => 'rw', isa => 'HashRef', lazy_build => 1);
 has 'report_data'                          => ( is => 'rw', isa => 'Str',     lazy_build => 1);
 has 'total_filesize'                       => ( is => 'rw', isa => 'Num',     lazy_build => 1);
+has 'total_files'                          => ( is => 'rw', isa => 'Int',     lazy_build => 1);
 
 
 sub _build_total_filesize
@@ -44,6 +45,21 @@ sub _build_total_filesize
 
   return $total_filesize;
 }
+
+sub _build_total_files
+{
+  my $self = shift;
+  my $total_files = 0;
+  my %user_files = %{$self->users_files};
+  
+  for my $user ( keys %{$self->users_files})
+  {
+    $total_files += @{$user_files{$user}{filenames}};
+  }
+
+  return $total_files;
+}
+
 
 sub _build_report_data
 {
