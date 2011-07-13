@@ -23,7 +23,7 @@ use File::Find;
 
 has 'output_file'         => ( is => 'rw', isa => 'Str', required   => 1 );
 has 'directory'           => ( is => 'rw', isa => 'Str', required   => 1 );
-has 'exclude'             => ( is => 'rw', isa => 'Str' );
+has 'exclude'             => ( is => 'rw', isa => 'Maybe[Str]' );
 has 'regex'               => ( is => 'rw', isa => 'Str', required   => 1 );
 has '_output_file_handle' => ( is => 'rw' );
 
@@ -66,7 +66,7 @@ sub _find_file_details
 {
   my $self = shift;
   my $filename = shift;
-  my ($uid, $size) = (stat($filename))[4,7];
+  my ($uid, $size) = (lstat($filename))[4,7];
   return unless(defined $uid);
   my ($username) = (getpwuid($uid))[0];
   $username = $uid unless defined $username;

@@ -12,7 +12,7 @@ ok my $find_files = Pathogens::FindFiles->new(
    output_file     => 't/data/tmp_output', 
    directory       => 't/data', 
    regex           => '(\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\_2$)', 
-   exclude         => '.snapshot'
+   exclude         => '.directory_to_ignore'
  ), 'initialize';
 
 ok open FILE, 't/data/tmp_output' or die $!, 'Results file can be opened';
