@@ -28,17 +28,22 @@ has 'directory'               => ( is => 'rw', isa => 'Str',      required => 1)
 sub BUILD
 {
   my $self = shift;
+  my $total_files =$self->total_files;
+  my $total_filesizes=$self->total_filesize;
+  my $directory = $self->directory;
+  my $report_data = $self->report_data;
+
 	my $body = <<BODY;
-	Report on files flagged as candidates for deletion in $self->directory
-	Total Number of Files identified: $self->total_files
-	Total Filesizes (GB): $self->total_filesizes
+Report on files flagged as candidates for deletion in: $directory
 
-	$self->report_data
+Total Number of Files identified: $total_files
+Total Filesizes (GB): $total_filesizes
+
+$report_data
 BODY
-
 	sendmail(-from => "path-help\@sanger.ac.uk",
-	           -to => join(',',$self->admin_email_addresses),
-	      -subject => "Files for deletion in $self->directory",
+	           -to => join(',', @{$self->admin_email_addresses}),
+	      -subject => "Files for deletion in $directory",
 	         -body => $body);
 
 }
@@ -56,7 +61,12 @@ sub sendmail {
     print MAIL "Subject: $subject\n\n";
     print MAIL $body;
 
-    close(MAIL);
+        if (close(MAIL)) {
+      print "The following was sent to <$to>:\n";
+    }
+    else {
+      warn "Failed to send mail: $!";
+    }
   }
 }
 
