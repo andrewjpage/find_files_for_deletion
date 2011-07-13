@@ -7,10 +7,11 @@ OverallStatsAdminEmail.pm   - Send an email to the Administrators with overall s
 use Pathogens::OverallStatsAdminEmail;
 Pathogens::OverallStatsAdminEmail->new(
 	admin_email_addresses => ['abc@example.com','efg@test.com'],
-	report_data => 'My report',
-	total_filesize => 5.2,
-	total_files => 123,
-	directory => '/nfs/abc'
+	report_data           => 'My report',
+	total_filesize        => 5.2,
+	total_files           => 123,
+	directory             => '/nfs/abc',
+	email_from_address    => 'example@example.com'
 );
 
 =cut
@@ -24,6 +25,7 @@ has 'report_data'             => ( is => 'rw', isa => 'Str',      required => 1)
 has 'total_filesize'          => ( is => 'rw', isa => 'Num',      required => 1);
 has 'total_files'             => ( is => 'rw', isa => 'Int',      required => 1);
 has 'directory'               => ( is => 'rw', isa => 'Str',      required => 1);
+has 'email_from_address'      => ( is => 'rw', isa => 'Str',      required => 1);
 
 sub BUILD
 {
@@ -41,7 +43,7 @@ Total Filesizes (GB): $total_filesizes
 
 $report_data
 BODY
-	sendmail(-from => "path-help\@sanger.ac.uk",
+	sendmail(-from => $self->email_from_address,
 	           -to => join(',', @{$self->admin_email_addresses}),
 	      -subject => "Files for deletion in $directory",
 	         -body => $body);

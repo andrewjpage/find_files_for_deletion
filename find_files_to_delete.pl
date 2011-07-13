@@ -108,7 +108,8 @@ else
 			report_data => $overall_stats->report_data,
 			total_filesize => $overall_stats->total_filesize,
 			total_files => $overall_stats->total_files,
-			directory => $config_settings{$place_to_search}{root_directory}
+			directory => $config_settings{$place_to_search}{root_directory},
+			email_from_address => $config_settings{default}{email_from_address}
 		);
 
   }
