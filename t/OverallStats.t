@@ -12,9 +12,10 @@ ok my $overall_stats = Pathogens::OverallStats->new(
    'find_files_output_file'              => 't/data/overall_stats_input_file'
 ), 'initialize';
 
-is $overall_stats->total_filesize, 6.3e-07, 'total filesize';
+is $overall_stats->total_filesize, 9.000000408, 'total filesize';
 
 my $expected_report_data = 'User	No.files	Size (GB)
-abc	26	6.3e-07
+abc	9	3
+efg	17	6.000000408
 ';
 is $overall_stats->report_data, $expected_report_data, 'report data';
