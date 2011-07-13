@@ -66,7 +66,7 @@ sub _find_file_details
 {
   my $self = shift;
   my $filename = shift;
-  my ($uid, $size) = (stat($filename))[4,7];
+  my ($uid, $size) = (lstat($filename))[4,7];
   return unless(defined $uid);
   my ($username) = (getpwuid($uid))[0];
   $username = $uid unless defined $username;
