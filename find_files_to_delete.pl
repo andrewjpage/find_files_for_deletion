@@ -46,6 +46,7 @@ This will look for files which can usually be deleted
 
 ./find_files_to_delete.pl -e test --directory /path_to/directory -o my_output_file
  Options:
+     --environment     Production or Test
      --directory       The root directory to use
      --output_file     The filename for the raw list of found files
 

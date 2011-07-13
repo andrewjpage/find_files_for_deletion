@@ -24,7 +24,7 @@ use Moose;
 has 'find_files_output_file'               => ( is => 'rw', isa => 'Str',   required   => 1 );
 has 'user_files_threshold'                 => ( is => 'rw', isa => 'Maybe[Int]');
 has 'user_total_space_threshold_gigabytes' => ( is => 'rw', isa => 'Maybe[Num]');
-has 'users_to_exclude'                     => ( is => 'rw', isa => 'Maybe[Array]');
+has 'users_to_exclude'                     => ( is => 'rw', isa => 'Maybe[ArrayRef]');
 
 has 'users_files'                          => ( is => 'rw', isa => 'HashRef', lazy_build => 1);
 has 'report_data'                          => ( is => 'rw', isa => 'Str',     lazy_build => 1);
