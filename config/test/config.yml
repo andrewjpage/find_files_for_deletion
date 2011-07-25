@@ -4,10 +4,12 @@ default:
   places_to_search: ['test']
   user_files_threshold: 1
   user_total_space_threshold_gigabytes: 0.0000001
-  users_to_exclude: ['root']
+  users_to_exclude: ['root', 'pathdb']
   admin_email_addresses: ['ap13@sanger.ac.uk']
+  email_from_address: path-help@sanger.ac.uk
 
 test:
   root_directory: t/data
+  exclude: .directory_to_ignore
   output_file: test_files_for_deletion
-  
+

@@ -53,7 +53,7 @@ sub BUILD
 	   find_files_output_file               => $self->output_file,
 	   user_files_threshold                 => $self->user_files_threshold,
 	   user_total_space_threshold_gigabytes => $self->user_total_space_threshold_gigabytes,
-	   users_to_exclude                     => $self->exclude
+	   users_to_exclude                     => $self->users_to_exclude
 	);
 
 	Pathogens::OverallStatsAdminEmail->new(
@@ -64,17 +64,19 @@ sub BUILD
 		directory => $self->directory,
 		email_from_address => $self->email_from_address
 	);
-
+  
+  my %users_files = %{$overall_stats->users_files};
+  
 	for my $username (keys  %{$overall_stats->users_files})
 	{
-	  my $user_files = %{$overall_stats->users_files}->{$username};
-
     Pathogens::UserFilesEmail->new(
       email_to_address    => $username,
       email_from_address  => $self->email_from_address,
-      file_names          => $user_files{filenames},
-      total_filesize      => $user_files{filesizes},
+      file_names          => $users_files{$username}{filenames},
+      total_filesize      => $users_files{$username}{filesizes},
       directory           => $self->directory
     );
-
+  }
 }
+
+1;
