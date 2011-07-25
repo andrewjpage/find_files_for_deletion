@@ -1,10 +1,10 @@
 default:
   regex: (\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.fastq$)|(\.fastq\.gz$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
-  exclude:
+  exclude: .snapshot
   places_to_search: ['pathdata']
   user_files_threshold: 100
   user_total_space_threshold_gigabytes: 0.01
-  users_to_exclude: ['root']
+  users_to_exclude: ['root', 'pathdb']
   admin_email_addresses: ['ap13@sanger.ac.uk']
   email_from_address: path-help@sanger.ac.uk
 
@@ -12,9 +12,9 @@ pathdata:
   root_directory: /nfs/pathdata
   exclude: .snapshot
   regex: (\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.fastq$)|(\.fastq\.gz$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
-  output_file: /lustre/scratch103/pathogen/pathpipe/pathdata_files_for_deletion
+  output_file: /tmp/pathdata_files_for_deletion
   
 pathogen002:
   root_directory: /nfs/pathogen002
-  output_file: /lustre/scratch103/pathogen/pathpipe/pathogen002_files_for_deletion
+  output_file: /tmp/pathogen002_files_for_deletion
   
