@@ -18,6 +18,7 @@ Pathogens::UserFilesEmail->new(
 package Pathogens::UserFilesEmail;
 
 use Moose;
+use POSIX;
 
 has 'email_to_address'        => ( is => 'rw', isa => 'Str',      required => 1);
 has 'email_from_address'      => ( is => 'rw', isa => 'Str',      required => 1);
@@ -30,7 +31,7 @@ sub BUILD
 {
   my $self = shift;
   my $total_files = @{$self->file_names};
-  my $total_filesizes=$self->total_filesize;
+  my $total_filesizes=ceil($self->total_filesize);
   my $directory = $self->directory;
   my $file_names = join("\n", @{$self->file_names});
 
@@ -65,8 +66,7 @@ sub sendmail {
     print MAIL "Subject: $subject\n\n";
     print MAIL $body;
 
-        if (close(MAIL)) {
-      print "The following was sent to <$to>:\n";
+    if (close(MAIL)) {
     }
     else {
       warn "Failed to send mail: $!";
