@@ -32,7 +32,7 @@ sub BUILD
   my $total_files = @{$self->file_names};
   my $total_filesizes=$self->total_filesize;
   my $directory = $self->directory;
-  my $file_names = join('\n', @{$self->file_names});
+  my $file_names = join("\n", @{$self->file_names});
 
 	my $body = <<BODY;
 The files below should not be stored on $directory .
