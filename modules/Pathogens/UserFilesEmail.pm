@@ -32,7 +32,7 @@ sub BUILD
   my $total_files = @{$self->file_names};
   my $total_filesizes=$self->total_filesize;
   my $directory = $self->directory;
-  my $file_names = join(',', @{$self->file_names});
+  my $file_names = join('\n', @{$self->file_names});
 
 	my $body = <<BODY;
 The files below should not be stored on $directory .
@@ -45,7 +45,7 @@ $file_names
 
 BODY
 	sendmail(-from => $self->email_from_address,
-	           -to => join(',', @{$self->admin_email_addresses}),
+	           -to => $self->email_to_address,
 	      -subject => "Files for possible deletion in $directory",
 	         -body => $body);
 
