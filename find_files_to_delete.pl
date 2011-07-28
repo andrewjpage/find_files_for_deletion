@@ -25,12 +25,9 @@ path-help@sanger.ac.uk
 BEGIN { unshift(@INC, './modules') }
 use strict;
 use warnings;
-use File::Find;
 use Getopt::Long;
 use Pathogens::ConfigSettings;
-use Pathogens::FindFiles;
-use Pathogens::OverallStats;
-use Pathogens::OverallStatsAdminEmail;
+use Pathogens::FindFilesAndEmailResults;
 
 my $DIRECTORY;
 my $OUTPUT_FILE;
@@ -60,57 +57,36 @@ my %config_settings = %{Pathogens::ConfigSettings->new(environment => $ENVIRONME
 #TODO dry this out
 if(( defined $DIRECTORY) && ( defined $OUTPUT_FILE))
 {
-  Pathogens::FindFiles->new(
-    output_file     => $OUTPUT_FILE, 
-    directory       => $DIRECTORY, 
-    regex           => $config_settings{default}{regex}, 
-    exclude         => $config_settings{default}{exclude}
+  
+  Pathogens::FindFilesAndEmailResults->new(
+    admin_email_addresses                => $config_settings{default}{admin_email_addresses},
+    email_from_address                   => $config_settings{default}{email_from_address},
+    directory                            => $DIRECTORY,
+    output_file                          => $OUTPUT_FILE,
+    regex                                => $config_settings{default}{regex},
+    exclude                              => $config_settings{default}{exclude},
+    user_files_threshold                 => $config_settings{default}{user_files_threshold},
+    user_total_space_threshold_gigabytes => $config_settings{default}{user_total_space_threshold_gigabytes},
+    users_to_exclude                     => $config_settings{default}{users_to_exclude}
   );
-
-	my $overall_stats = Pathogens::OverallStats->new(
-	   find_files_output_file               => $OUTPUT_FILE,
-	   user_files_threshold                 => $config_settings{default}{user_files_threshold},
-	   user_total_space_threshold_gigabytes => $config_settings{default}{user_total_space_threshold_gigabytes},
-	   users_to_exclude                     => $config_settings{default}{users_to_exclude}
-	);
-	
-		
-	Pathogens::OverallStatsAdminEmail->new(
-		admin_email_addresses => $config_settings{default}{admin_email_addresses},
-		report_data => $overall_stats->report_data,
-		total_filesize => $overall_stats->total_filesize,
-		total_files => $overall_stats->total_files,
-		directory => $DIRECTORY
-	);
-
 }
 else
 {
   # run in bulk from the config file
   for my $place_to_search ( @{$config_settings{default}{places_to_search}} )
   {
-    Pathogens::FindFiles->new(
-      directory       => $config_settings{$place_to_search}{root_directory}, 
-      output_file     => $config_settings{$place_to_search}{output_file},
-      regex           => ($config_settings{$place_to_search}{regex}   || $config_settings{default}{regex}), 
-      exclude         => ($config_settings{$place_to_search}{exclude} || $config_settings{default}{exclude})
+    
+    Pathogens::FindFilesAndEmailResults->new(
+      admin_email_addresses                => $config_settings{default}{admin_email_addresses},
+      email_from_address                   => $config_settings{default}{email_from_address},
+      directory                            => $config_settings{$place_to_search}{root_directory},
+      output_file                          => $config_settings{$place_to_search}{output_file},
+      regex                                => ($config_settings{$place_to_search}{regex}   || $config_settings{default}{regex}),
+      exclude                              => ($config_settings{$place_to_search}{exclude} || $config_settings{default}{exclude}),
+      user_files_threshold                 => $config_settings{default}{user_files_threshold},
+      user_total_space_threshold_gigabytes => $config_settings{default}{user_total_space_threshold_gigabytes},
+      users_to_exclude                     => $config_settings{default}{users_to_exclude}
     );
-
-		my $overall_stats = Pathogens::OverallStats->new(
-		   find_files_output_file               => $config_settings{$place_to_search}{output_file},
-		   user_files_threshold                 => $config_settings{default}{user_files_threshold},
-		   user_total_space_threshold_gigabytes => $config_settings{default}{user_total_space_threshold_gigabytes},
-		   users_to_exclude                     => $config_settings{default}{users_to_exclude}
-		);
-		
-		Pathogens::OverallStatsAdminEmail->new(
-			admin_email_addresses => $config_settings{default}{admin_email_addresses},
-			report_data => $overall_stats->report_data,
-			total_filesize => $overall_stats->total_filesize,
-			total_files => $overall_stats->total_files,
-			directory => $config_settings{$place_to_search}{root_directory},
-			email_from_address => $config_settings{default}{email_from_address}
-		);
 
   }
 }

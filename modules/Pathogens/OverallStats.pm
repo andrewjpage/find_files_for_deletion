@@ -100,7 +100,7 @@ sub _build_users_files
       };
     }
     push(@{$users_files{$file_details[0]}{filenames}}, $file_details[1]);
-    $users_files{$file_details[0]}{filesizes} += $file_details[2]/1000000000;
+    $users_files{$file_details[0]}{filesizes} += $file_details[2]/1073741824;
   }
   close(INPUT_FILE);
   

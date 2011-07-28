@@ -19,6 +19,7 @@ Pathogens::OverallStatsAdminEmail->new(
 package Pathogens::OverallStatsAdminEmail;
 
 use Moose;
+use POSIX;
 
 has 'admin_email_addresses'   => ( is => 'rw', isa => 'ArrayRef', required => 1);
 has 'report_data'             => ( is => 'rw', isa => 'Str',      required => 1);
@@ -31,7 +32,7 @@ sub BUILD
 {
   my $self = shift;
   my $total_files =$self->total_files;
-  my $total_filesizes=$self->total_filesize;
+  my $total_filesizes= ceil($self->total_filesize);
   my $directory = $self->directory;
   my $report_data = $self->report_data;
 
@@ -63,8 +64,7 @@ sub sendmail {
     print MAIL "Subject: $subject\n\n";
     print MAIL $body;
 
-        if (close(MAIL)) {
-      print "The following was sent to <$to>:\n";
+    if (close(MAIL)) {
     }
     else {
       warn "Failed to send mail: $!";
