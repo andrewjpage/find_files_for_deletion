@@ -4,13 +4,13 @@ default:
   places_to_search: ['pathdata']
   user_files_threshold: 100
   user_total_space_threshold_gigabytes: 0.01
-  users_to_exclude: ['root', 'pathdb']
+  users_to_exclude: ['root', 'pathdb','parkhill']
   admin_email_addresses: ['ap13@sanger.ac.uk']
   email_from_address: path-help@sanger.ac.uk
 
 pathdata:
-  root_directory: /nfs/pathdata
-  exclude: .snapshot
+  root_directory:  /nfs/pathdata/.snapshot/nightly.5/Salmonella/typhimurium/A130
+  exclude: snapshot
   regex: (\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.fastq$)|(\.fastq\.gz$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
   output_file: /tmp/pathdata_files_for_deletion
   

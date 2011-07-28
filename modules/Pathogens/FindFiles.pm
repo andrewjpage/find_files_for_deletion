@@ -34,19 +34,21 @@ sub BUILD
   $self->_output_file_handle($ofh);
   
   find(
-    sub {
+    { wanted => sub {
       _wanted({self => $self});
-      _preprocess({self => $self});
     },
+     preprocess => \&_preprocess
+},
      $self->directory
     );
 
   close($self->_output_file_handle);
 }
-
+use Data::Dumper;
 sub _preprocess{
-  my $self = ${$_[0]}{self};
-  grep { $_ !~ /$self->exclude/ } @_;
+  #my $self = ${$_[0]}{self};
+  print Dumper  @_;  
+  grep { $_ !~ /snapshot/ } @_;
 }
 
 sub _wanted {
