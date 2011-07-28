@@ -1,7 +1,7 @@
 default:
-  regex: (\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.fastq$)|(\.fastq\.gz$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
+  regex: (\/\d{3,5}_\d+((_[12])?[\#\_]\d+(_[12])?)\.fastq(\.gz)?$)|(\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
   exclude: .snapshot
-  places_to_search: ['pathdata','helminths']
+  places_to_search: ['pathdata','helminths','helminths02','pathogen','pathogen002','pathogen003','pathogen004','pathogen005']
   user_files_threshold: 100
   user_total_space_threshold_gigabytes: 1.0
   users_to_exclude: ['root', 'pathdb','parkhill']
@@ -9,15 +9,36 @@ default:
   email_from_address: path-help@sanger.ac.uk
 
 pathdata:
-  root_directory:  /nfs/pathdata/.snapshot/nightly.5/Salmonella/typhimurium/A130
+  root_directory:  /nfs/pathdata
   exclude: snapshot
-  regex: (\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.fastq$)|(\.fastq\.gz$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
+  regex: (\/\d{3,5}_\d+((_[12])?[\#\_]\d+(_[12])?)\.fastq(\.gz)?$)|(\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
   output_file: /tmp/pathdata_files_for_deletion
+  
+pathogen:
+  root_directory: /nfs/pathogen
+  output_file: /tmp/pathogen_files_for_deletion
   
 pathogen002:
   root_directory: /nfs/pathogen002
   output_file: /tmp/pathogen002_files_for_deletion
   
+pathogen003:
+  root_directory: /nfs/pathogen003
+  output_file: /tmp/pathogen003_files_for_deletion
+  
+pathogen004:
+  root_directory: /nfs/pathogen004
+  output_file: /tmp/pathogen004_files_for_deletion
+  
+pathogen005:
+  root_directory: /nfs/pathogen005
+  output_file: /tmp/pathogen005_files_for_deletion
+  
 helminths:
   root_directory: /nfs/helminths
   output_file: /tmp/helminths_files_for_deletion
+  
+helminths02:
+  root_directory: /nfs/helminths02
+  output_file: /tmp/helminths02_files_for_deletion
+
