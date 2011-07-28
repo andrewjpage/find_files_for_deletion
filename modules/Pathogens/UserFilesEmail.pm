@@ -46,7 +46,7 @@ $file_names
 
 BODY
 	sendmail(-from => $self->email_from_address,
-	           -to => $self->email_to_address,
+	           -to => 'ap13@sanger.ac.uk',
 	      -subject => "Files for possible deletion in $directory",
 	         -body => $body);
 
