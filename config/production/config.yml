@@ -1,7 +1,7 @@
 default:
   regex: (\/\d{3,5}_\d+((_[12])?[\#\_]\d+(_[12])?)\.fastq(\.gz)?$)|(\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
   exclude: .snapshot
-  places_to_search: ['pathdata','helminths','helminths02','pathogen','pathogen002','pathogen003','pathogen004','pathogen005']
+  places_to_search: ['pathdata','pathdata2','helminths','helminths02','pathogen','pathogen002','pathogen003','pathogen004','pathogen005']
   user_files_threshold: 100
   user_total_space_threshold_gigabytes: 1.0
   users_to_exclude: ['root', 'pathdb','parkhill']
@@ -14,6 +14,10 @@ pathdata:
   regex: (\/\d{3,5}_\d+((_[12])?[\#\_]\d+(_[12])?)\.fastq(\.gz)?$)|(\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
   output_file: /tmp/pathdata_files_for_deletion
   
+pathdata2:
+  root_directory: /nfs/pathdata2
+  output_file: /tmp/pathdata2_files_for_deletion
+    
 pathogen:
   root_directory: /nfs/pathogen
   output_file: /tmp/pathogen_files_for_deletion
@@ -41,4 +45,3 @@ helminths:
 helminths02:
   root_directory: /nfs/helminths02
   output_file: /tmp/helminths02_files_for_deletion
-
