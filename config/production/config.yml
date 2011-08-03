@@ -12,36 +12,36 @@ pathdata:
   root_directory:  /nfs/pathdata
   exclude: snapshot
   regex: (\/\d{3,5}_\d+((_[12])?[\#\_]\d+(_[12])?)\.fastq(\.gz)?$)|(\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
-  output_file: ~/tmp/pathdata_files_for_deletion
+  output_file: /nfs/users/nfs_p/pathpipe/tmp/pathdata_files_for_deletion
   
 pathdata2:
   root_directory: /nfs/pathdata2
-  output_file: ~/tmp/pathdata2_files_for_deletion
+  output_file: /nfs/users/nfs_p/pathpipe/tmp/pathdata2_files_for_deletion
     
 pathogen:
   root_directory: /nfs/pathogen
-  output_file: ~/tmp/pathogen_files_for_deletion
+  output_file: /nfs/users/nfs_p/pathpipe/tmp/pathogen_files_for_deletion
   
 pathogen002:
   root_directory: /nfs/pathogen002
-  output_file: ~/tmp/pathogen002_files_for_deletion
+  output_file: /nfs/users/nfs_p/pathpipe/tmp/pathogen002_files_for_deletion
   
 pathogen003:
   root_directory: /nfs/pathogen003
-  output_file: ~/tmp/pathogen003_files_for_deletion
+  output_file: /nfs/users/nfs_p/pathpipe/tmp/pathogen003_files_for_deletion
   
 pathogen004:
   root_directory: /nfs/pathogen004
-  output_file: ~/tmp/pathogen004_files_for_deletion
+  output_file: /nfs/users/nfs_p/pathpipe/tmp/pathogen004_files_for_deletion
   
 pathogen005:
   root_directory: /nfs/pathogen005
-  output_file: ~/tmp/pathogen005_files_for_deletion
+  output_file: /nfs/users/nfs_p/pathpipe/tmp/pathogen005_files_for_deletion
   
 helminths:
   root_directory: /nfs/helminths
-  output_file: ~/tmp/helminths_files_for_deletion
+  output_file: /nfs/users/nfs_p/pathpipe/tmp/helminths_files_for_deletion
   
 helminths02:
   root_directory: /nfs/helminths02
-  output_file: ~/tmp/helminths02_files_for_deletion
+  output_file: /nfs/users/nfs_p/pathpipe/tmp/helminths02_files_for_deletion
