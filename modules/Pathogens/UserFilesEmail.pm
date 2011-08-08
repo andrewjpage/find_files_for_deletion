@@ -36,18 +36,26 @@ sub BUILD
   my $file_names = join("\n", @{$self->file_names});
 
 	my $body = <<BODY;
-The files below should not be stored on $directory .
-Please review them and clean them up where nessisary. If files are included erroneously, please contact path-help\@sanger.ac.uk .
+  Hi,
 
-Total Number of files for deletion: $total_files
-Total space taken up by those files (GB): $total_filesizes
+  In an attempt to manage the disk usage on pathogen disks we are now running regular checks of the filesystems. Attached is a list of files owned by you that could potentially be deleted or converted to a more efficient data storage format. These files are either
+
+  sam files : all sam files should be converted to bam files
+  fastq files : it should not be necessary to keep a copy of the fastq files as they are available through pathfind
+  files ending with ~ : these are temporary files and should be deleted
+
+  Can you please take a careful look at the list of files attached and either delete or convert them to a more efficient format. This is a matter of urgency and we would greatly appreciate if you could look at this list asap. If you need help with cleaning up these files or if you require additional disk space to work in please email path-help@sanger.ac.uk
+
+  Thanks,
+
+  Pathogen Software Developers  
 
 $file_names
 
 BODY
 	sendmail(-from => $self->email_from_address,
-	           -to => 'ap13@sanger.ac.uk',
-	      -subject => "Files for possible deletion in $directory",
+	           -to => $self->email_to_address,
+	      -subject => "Files needing attention on $directory",
 	         -body => $body);
 
 }
