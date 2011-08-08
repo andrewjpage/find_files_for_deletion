@@ -65,21 +65,21 @@ sub BUILD
 		email_from_address => $self->email_from_address
 	);
   
-  #my %users_files = %{$overall_stats->users_files};
-  #
-	#for my $username (keys  %{$overall_stats->users_files})
-	#{
-  #  next if(( defined $self->user_total_space_threshold_gigabytes) && $users_files{$username}{filesizes} < $self->user_total_space_threshold_gigabytes);
-  #  next if(( defined $self->user_files_threshold) && ( @{$users_files{$username}{filenames}}; < $self->user_files_threshold));
-  # 
-  #  Pathogens::UserFilesEmail->new(
-  #    email_to_address    => $username,
-  #    email_from_address  => $self->email_from_address,
-  #    file_names          => $users_files{$username}{filenames},
-  #    total_filesize      => $users_files{$username}{filesizes},
-  #    directory           => $self->directory
-  #  );
-  #}
+  my %users_files = %{$overall_stats->users_files};
+  
+	for my $username (keys  %{$overall_stats->users_files})
+	{
+    next if(( defined $self->user_total_space_threshold_gigabytes) && $users_files{$username}{filesizes} < $self->user_total_space_threshold_gigabytes);
+    next if(( defined $self->user_files_threshold) && ( @{$users_files{$username}{filenames}}; < $self->user_files_threshold));
+   
+    Pathogens::UserFilesEmail->new(
+      email_to_address    => $username,
+      email_from_address  => $self->email_from_address,
+      file_names          => $users_files{$username}{filenames},
+      total_filesize      => $users_files{$username}{filesizes},
+      directory           => $self->directory
+    );
+  }
 }
 
 1;

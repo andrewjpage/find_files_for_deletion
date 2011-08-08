@@ -1,17 +1,16 @@
 default:
-  regex: (\/\d{3,5}_\d+((_[12])?[\#\_]\d+(_[12])?)\.fastq(\.gz)?$)|(\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
+  regex: (\/\d{3,5}_\d+((_[12])?[\#\_]\d+(_[12])?)\.fastq(\.gz)?$)|(\~$)|(\.sam$)
   exclude: .snapshot
   places_to_search: ['pathdata','pathdata2','helminths','helminths02','pathogen','pathogen002','pathogen003','pathogen004','pathogen005']
   user_files_threshold: 100
-  user_total_space_threshold_gigabytes: 1.0
-  users_to_exclude: ['root', 'pathdb','parkhill']
-  admin_email_addresses: ['ap13@sanger.ac.uk']
+  user_total_space_threshold_gigabytes: 10.0
+  users_to_exclude: ['root', 'pathdb','parkhill','pathpipe','gd1']
+  admin_email_addresses: ['pathdevg@sanger.ac.uk']
   email_from_address: path-help@sanger.ac.uk
 
 pathdata:
   root_directory:  /nfs/pathdata
   exclude: snapshot
-  regex: (\/\d{3,5}_\d+((_[12])?[\#\_]\d+(_[12])?)\.fastq(\.gz)?$)|(\.out$)|(\.dribble\.)|(\.err$)|(\.o$)|(\.e$)|(\~$)|(\/#)|(\.log$)|(\/LastGraph)|(\/Roadmaps)|(\/Sequences\/)|(ICORN)|(\/IMAGE)|(\/fasta\/)|(\/(t)?blast.?\/)|(tmp)|(\/temp\/)|(\_2$)|(\.crunch$)|(\.sh$)|(\.pl$)|(\.pm$)|(\.py$)|(\.map$)|(\.sam$)|(\.out\.gz$)|(\.cigar$)|(\.cigar\.gz$)|(\.tar$)
   output_file: /nfs/users/nfs_p/pathpipe/tmp/pathdata_files_for_deletion
   
 pathdata2:
