@@ -44,7 +44,7 @@ sub BUILD
   fastq files : it should not be necessary to keep a copy of the fastq files as they are available through pathfind
   files ending with ~ : these are temporary files and should be deleted
 
-  Can you please take a careful look at the list of files attached and either delete or convert them to a more efficient format. This is a matter of urgency and we would greatly appreciate if you could look at this list asap. If you need help with cleaning up these files or if you require additional disk space to work in please email path-help@sanger.ac.uk
+  Can you please take a careful look at the list of files attached and either delete or convert them to a more efficient format. This is a matter of urgency and we would greatly appreciate if you could look at this list asap. If you need help with cleaning up these files or if you require additional disk space to work in please email path-help\@sanger.ac.uk
 
   Thanks,
 
