@@ -82,6 +82,10 @@ sub _find_file_details
 {
   my $self = shift;
   my $filename = shift;
+    
+  # is file a sym link?
+  return if( -l $filename);
+  
   my ($uid, $size) = (lstat($filename))[4,7];
   return unless(defined $uid);
   my $username = $self->_find_username_from_uid($uid);
