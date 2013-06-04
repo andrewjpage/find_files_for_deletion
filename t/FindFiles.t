@@ -17,36 +17,34 @@ ok my $find_files = Pathogens::FindFiles->new(
 
 
 
-my @expected_filenames = (
-  't/data/tmp_output'              ,
-  't/data/datadir/#abc'            ,
-  't/data/datadir/abc.dribble.efg' ,
-  't/data/datadir/abc.e'           ,
-  't/data/datadir/abc.efg~'        ,
-  't/data/datadir/abc.err'         ,
-  't/data/datadir/abc.log'         ,
-  't/data/datadir/abc.o'           ,
-  't/data/datadir/abc.out'         ,
-  't/data/datadir/abc_2'           ,
-  't/data/datadir/blast/.empty'    ,
-  't/data/datadir/fasta/.empty'    ,
-  't/data/datadir/ICORN'           ,
-  't/data/datadir/ICORN/.empty'    ,
-  't/data/datadir/IMAGE'           ,
-  't/data/datadir/IMAGE/.empty'    ,
-  't/data/datadir/IMAGE2'          ,
-  't/data/datadir/IMAGE2/.empty'   ,
-  't/data/datadir/LastGraph'       ,
-  't/data/datadir/LastGraph/.empty',
-  't/data/datadir/Roadmaps'        ,
-  't/data/datadir/Roadmaps/.empty' ,
-  't/data/datadir/Sequences/.empty',
-  't/data/datadir/tblastn/.empty'  ,
-  't/data/datadir/tmp'             ,
-  't/data/datadir/tmp/.empty'
+my %expected_filenames = (
+  't/data/tmp_output'              => 1 ,
+  't/data/datadir/#abc'            => 1 ,
+  't/data/datadir/abc.dribble.efg' => 1 ,
+  't/data/datadir/abc.e'           => 1 ,
+  't/data/datadir/abc.efg~'        => 1 ,
+  't/data/datadir/abc.err'         => 1 ,
+  't/data/datadir/abc.log'         => 1 ,
+  't/data/datadir/abc.o'           => 1 ,
+  't/data/datadir/abc.out'         => 1 ,
+  't/data/datadir/abc_2'           => 1 ,
+  't/data/datadir/blast/.empty'    => 1 ,
+  't/data/datadir/fasta/.empty'    => 1 ,
+  't/data/datadir/ICORN'           => 1 ,
+  't/data/datadir/ICORN/.empty'    => 1 ,
+  't/data/datadir/IMAGE'           => 1 ,
+  't/data/datadir/IMAGE/.empty'    => 1 ,
+  't/data/datadir/IMAGE2'          => 1 ,
+  't/data/datadir/IMAGE2/.empty'   => 1 ,
+  't/data/datadir/LastGraph'       => 1 ,
+  't/data/datadir/LastGraph/.empty'=> 1 ,
+  't/data/datadir/Roadmaps'        => 1 ,
+  't/data/datadir/Roadmaps/.empty' => 1 ,
+  't/data/datadir/Sequences/.empty' => 1 ,
+  't/data/datadir/tblastn/.empty'  => 1 ,
+  't/data/datadir/tmp'             => 1 ,
+  't/data/datadir/tmp/.empty'      => 1 
 );
-
-my @sorted_expected_filenames = sort(@expected_filenames);
 
 my $line_count = 0;
 
@@ -55,7 +53,7 @@ while(<$fh>)
 {
   chomp;
   my($username, $filename, $filesize) = split("\t");
-  is $filename, $sorted_expected_filenames[$line_count], 'file correctly found in output: '.$sorted_expected_filenames[$line_count];
+  ok(defined( $expected_filenames{$filename}), 'file correctly found in output');
   $line_count++;
 }
 
