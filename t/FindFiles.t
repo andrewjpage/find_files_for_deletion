@@ -4,7 +4,7 @@ use warnings;
 
 BEGIN { unshift(@INC, './modules') }
 BEGIN {
-    use Test::Most tests => 29;
+    use Test::Most ;
     use_ok('Pathogens::FindFiles');
 }
 
@@ -15,7 +15,8 @@ ok my $find_files = Pathogens::FindFiles->new(
    exclude         => '.directory_to_ignore'
  ), 'initialize';
 
-ok open FILE, 't/data/tmp_output' or die $!, 'Results file can be opened';
+
+
 my @expected_filenames = (
   't/data/tmp_output'              ,
   't/data/datadir/#abc'            ,
@@ -45,11 +46,17 @@ my @expected_filenames = (
   't/data/datadir/tmp/.empty'
 );
 
+my @sorted_expected_filenames = sort(@expected_filenames);
+
 my $line_count = 0;
-while(<FILE>)
+
+open( my $fh, '-|', 'sort t/data/tmp_output');
+while(<$fh>)
 {
   chomp;
   my($username, $filename, $filesize) = split("\t");
-  is $filename, $expected_filenames[$line_count], 'file correctly found in output: '.$expected_filenames[$line_count];
+  is $filename, $sorted_expected_filenames[$line_count], 'file correctly found in output: '.$sorted_expected_filenames[$line_count];
   $line_count++;
 }
+
+done_testing();
